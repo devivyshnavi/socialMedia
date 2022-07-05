@@ -10,15 +10,20 @@ use Illuminate\Support\Facades\Hash;
 
 class userController extends Controller
 {
+    /*
+    This function is to go to edit blade
+     */
+
     public function edit($id)
     {
         try {
             $data = User::find($id);
             return view('user/edit', compact('data'));
         } catch (\Exception $e) {
-            return $e;
+            return back()->with('errorMsg', $e->getMessage());
         }
     }
+    /* This function updating the user details */
     public function update(storePostRequest $request, $id)
     {
 
@@ -32,22 +37,29 @@ class userController extends Controller
                 return back()->with('successMsg', "Updated successfully");
             }
         } catch (\Exception $e) {
-            return $e;
+            return back()->with('errorMsg', $e->getMessage());
         }
     }
-    public function changepassword($id)
+    /*
+    This function is to go to changePassword blade
+     */
+    public function changePassword($id)
     {
         try {
             $data = User::find($id);
             return view('user/changePassword', compact('data'));
         } catch (\Exception $e) {
-            return $e;
+            return back()->with('errorMsg', $e->getMessage());
         }
     }
-    public function updatepassword(updateRequest $request, $id)
+    /*
+
+     This function is to update password
+*/
+    public function updatePassword(updateRequest $request, $id)
     {
-        $data = User::find($id);
         try {
+            $data = User::find($id);
             $dbpassword = $data->password;
             $oldpassword = $request->oldpassword;
             $newpassword = $request->newpassword;
@@ -65,7 +77,7 @@ class userController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            return $e;
+            return back()->with('errorMsg', $e->getMessage());
         }
     }
 }

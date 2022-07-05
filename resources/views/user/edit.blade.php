@@ -42,6 +42,9 @@
         @if(Session::has('successMsg'))
         <div class="alert alert-info">{{Session::get('successMsg')}}</div>
         @endif
+        @if(Session::has('errorMsg'))
+        <div class="alert alert-danger">{{Session::get('errorMsg')}}</div>
+        @endif
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Edit Profile</div>

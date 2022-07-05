@@ -31,10 +31,13 @@ Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallba
 Route::get('login/github', [LoginController::class, 'redirectToGithub'])->name('login.github');
 Route::get('login/github/callback', [LoginController::class, 'handleGithubCallback']);
 
-//edit
+//edit user details
 Route::get('edit/{id}', [userController::class, 'edit']);
 Route::put('update/{id}', [userController::class, 'update']);
-Route::get('changepassword/{id}', [userController::class, 'changepassword']);
-Route::put('updatepassword/{id}', [userController::class, 'updatepassword']);
+
+//change password
+Route::get('changepassword/{id}', [userController::class, 'changePassword']);
+Route::put('updatepassword/{id}', [userController::class, 'updatePassword']);
+
 //logout
 Route::get('logout', [LoginController::class, 'logout']);
