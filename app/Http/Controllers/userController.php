@@ -20,6 +20,9 @@ class userController extends Controller
     This function is to go to edit blade
      */
 
+    /**
+     * This function updates user details
+     */
     public function edit($id)
     {
         try {
