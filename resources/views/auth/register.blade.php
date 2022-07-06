@@ -45,7 +45,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" id="registerform" data-parsley-validate>
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" id="registerform" data-parsley-validate>
                         @csrf
 
                         <div class="row mb-3">
@@ -108,6 +108,18 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" data-parsley-trigger="keyup" data-parsley-equalto="#password" required autocomplete="new-password">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="image" class="col-md-4 col-form-label text-md-end">Image</label>
+
+                            <div class="col-md-6">
+                                <input id="image" type="file" class="form-control" name="image" data-parsley-trigger="change" required>
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 

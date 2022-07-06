@@ -50,7 +50,7 @@
                 <div class="card-header">Edit Profile</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/update/{{$data->id}}" id="editForm" data-parsely-validate>
+                    <form method="POST" action="/update/{{$data->id}}" enctype="multipart/form-data" id="editForm" data-parsely-validate>
                         @csrf
                         @method('PUT')
                         <div class="row mb-3">
@@ -108,7 +108,17 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <div class="row mb-3">
+                            <label for="image" class="col-md-4 col-form-label text-md-end">Image</label>
+                            <div class="col-md-6">
+                                <input id="image" type="file" class="form-control" name="image">
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-success">

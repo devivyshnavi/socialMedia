@@ -29,9 +29,21 @@ class userController extends Controller
 
         try {
             $user = User::find($id);
-            $user->firstname = $request->firstname;
-            $user->status = $request->status;
-            $user->lastname = $request->lastname;
+            /* If the image wants to change */
+            if ($request->hasFile('image')) {
+                $image = $request->image;
+                $image_name = rand() . "_" . $image->getClientOriginalName();
+                $image->move(public_path('/uploads'), $image_name);
+                $user->firstname = $request->firstname;
+                $user->status = $request->status;
+                $user->lastname = $request->lastname;
+                $user->avatar = '/uploads/' . $image_name;
+            } else {
+                $user->firstname = $request->firstname;
+                $user->status = $request->status;
+                $user->lastname = $request->lastname;
+            }
+
 
             if ($user->save()) {
                 return back()->with('successMsg', "Updated successfully");
